@@ -1,7 +1,7 @@
 import { toast } from 'react-toastify';
 import { Button, Form, Input, Wrapper, Icon } from './Searchbar.styled';
 
-export const Searchbar = ({ changeQuery, handleSubmit }) => {
+export const Searchbar = ({ handleSubmit }) => {
   const handleSearchSubmit = e => {
     e.preventDefault();
     const newQuery = e.target.elements.query.value;
