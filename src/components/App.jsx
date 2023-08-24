@@ -27,7 +27,15 @@ export const App = () => {
           );
           return;
         }
-        setImages(prevImages => [...prevImages, ...images]);
+        const normalizedImages = images.map(
+          ({ id, webformatURL, tags, largeImageURL }) => ({
+            id,
+            webformatURL,
+            tags,
+            largeImageURL,
+          })
+        );
+        setImages(prevImages => [...prevImages, ...normalizedImages]);
         setMore(images.length === 12);
       } catch (error) {
         toast.error('An error occurred while fetching images.', {
@@ -42,6 +50,10 @@ export const App = () => {
   }, [query, page]);
 
   const changeQuery = newQuery => {
+    if (query === newQuery) {
+      toast.warn('Please, enter a new query', { autoClose: 1500 });
+      return;
+    }
     setQuery(newQuery);
     setImages([]);
     setPage(1);
